@@ -53,8 +53,10 @@
           const radius = 10000;
           const limit = 50;
           marker.setLngLat(point).addTo(map);
-          const url = "https://api.mapbox.com/v4/oscsla.dvyati40/tilequery/" + point[58.80447406] + "," + point[5.612074743] + ".json?radius=" + 10000 + "&limit=" + 50 + "&access_token=pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA";
-const query = await fetch(url, { method: 'GET' });
+          const apiUrl = "https://api.mapbox.com/v4/oscsla.dvyati40/tilequery/" + point[0] + "," + point[1] + ".json?radius=10000&limit=50&access_token=YOUR_ACCESS_TOKEN";
+console.log(apiUrl);
+const query = await fetch(apiUrl, { method: 'GET' });
+
 
           const json = await query.json();
 if (!query.ok) { console.error('Error fetching tile query:', query.statusText); }
