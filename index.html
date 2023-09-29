@@ -13,6 +13,13 @@
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 20px;
         }
 
         #map {
@@ -20,7 +27,8 @@
             top: 0;
             bottom: 0;
             width: 100%;
-            display: none; /* Initially hide the map */
+            height: 100%;
+            display: none; 
         }
     </style>
 </head>
@@ -30,14 +38,28 @@
     <div id="map"></div>
 
     <script>
+        let mapInitialized = false; // Track if the map has been initialized
+
         function showMap() {
             document.querySelector('button').style.display = 'none'; // Hide the button
             document.querySelector('#map').style.display = 'block'; // Show the map
-            initializeMap(); // Initialize the map after making the container visible
+
+            if (!mapInitialized) {
+                initializeMap(); // Initialize the map only if it hasn't been initialized yet
+                mapInitialized = true;
+            }
         }
 
         function initializeMap() {
-mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
+            // Your Mapbox code starts here
+            mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v11',
+                center: [5.7327, 58.969975],
+                zoom: 12
+            });
+            mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v11',
