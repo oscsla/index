@@ -39,6 +39,7 @@
 
     <script>
         let mapInitialized = false; // Track if the map has been initialized
+        let map;
 
         function showMap() {
             document.querySelector('button').style.display = 'none'; // Hide the button
@@ -51,14 +52,7 @@
         }
 
         function initializeMap() {
-            // Your Mapbox code starts here
-            mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mapbox/light-v11',
-                center: [5.7327, 58.969975],
-                zoom: 12
-            });
+
             mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
       const map = new mapboxgl.Map({
         container: 'map',
