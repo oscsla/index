@@ -1,32 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
-    <title>Front Page</title>
+    <title>Demo: Make a healthy food finder with the Tilequery API</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f4f4;
-        }
-
-        button {
-            padding: 15px 30px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            border-radius: 5px;
+            margin: 0;
+            padding: 0;
         }
 
         #map {
@@ -34,26 +19,35 @@
             top: 0;
             bottom: 0;
             width: 100%;
-            display: none;  /* Initially hide the map */
+            display: none; /* Initially hide the map */
+        }
+
+        #kartButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
         }
     </style>
 </head>
-
 <body>
-    <button onclick="showMap()">Kart</button>
+    <button id="kartButton" onclick="showMap()">Kart</button>
     <div id="map"></div>
 
     <script>
         function showMap() {
-            document.querySelector('button').style.display = 'none'; // Hide the button
-            document.querySelector('#map').style.display = 'block'; // Show the map
-mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
-      const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v11',
-        center: [5.7327, 58.969975],
-        zoom: 12
-      });
+            document.getElementById('map').style.display = 'block'; // Display the map
+            initializeMap(); // Initialize the map
+        }
+
+        function initializeMap() {
+            mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/light-v11',
+                center: [5.7327, 58.969975],
+                zoom: 12
+            });
 
       map.on('load', () => {
         const geocoder = new MapboxGeocoder({
