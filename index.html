@@ -31,13 +31,13 @@
     </style>
 </head>
 <body>
-    <button id="kartButton" onclick="showMap()">Kart</button>
+    <button id="kartButton">Kart</button>
     <div id="map"></div>
 
     <script>
         function showMap() {
-            document.getElementById('map').style.display = 'block'; // Display the map
-            initializeMap(); // Initialize the map
+        document.getElementById('map').style.display = 'block'; // Display the map
+        initializeMap(); // Initialize the map
         }
 
         function initializeMap() {
@@ -150,5 +150,8 @@ if (!query.ok) { console.error('Error fetching tile query:', query.statusText); 
           popup.remove();
         });
       });
+  // Add event listener for the Kart button
+    document.getElementById('kartButton').addEventListener('click', showMap);
+</script>
 </body>
 </html>
