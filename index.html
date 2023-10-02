@@ -13,10 +13,14 @@
         body {
             margin: 0;
             padding: 0;
-           .mapboxgl-popup-track-pointer * {
-    -webkit-user-select: none;
-    user-select: none;
-}
+        }
+
+       .mapboxgl-popup-track-pointer * {
+       -webkit-user-select: none; /* For Safari */
+       -ms-user-select: none;     /* For old versions of Edge */
+       user-select: none;         /* Standard Syntax */
+        }
+
         #mapContainer {
             display: none;
             position: absolute;
@@ -154,7 +158,7 @@ if (!query.ok) { console.error('Error fetching tile query:', query.statusText); 
           popup.remove();
         });
       });
- document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     let btn = document.getElementById("mapButton");
     btn.addEventListener("click", showMap);
 });
