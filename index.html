@@ -8,43 +8,39 @@
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
+
     <style>
         body {
             margin: 0;
             padding: 0;
         }
 
-        #map {
+        #mapContainer {
+            display: none;
             position: absolute;
             top: 0;
             bottom: 0;
             width: 100%;
-            display: none; /* Initially hide the map */
-        }
-
-        #kartButton {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <button id="kartButton">Kart</button>
-    <div id="map"></div>
+    <button id="mapButton" style="position: absolute; z-index: 1;">Kart</button>
+    <div id="mapContainer">
+        <div id="map"></div>
+    </div>
 
     <script>
         function showMap() {
-        document.getElementById('map').style.display = 'block'; // Display the map
-        initializeMap(); // Initialize the map
+            document.getElementById("mapButton").style.display = "none";
+            document.getElementById("mapContainer").style.display = "block";
         }
 
         function initializeMap() {
             mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
             const map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/light-v11',
+                style: 'mapbox://styles/mapbox/light-v12',
                 center: [5.7327, 58.969975],
                 zoom: 12
             });
@@ -150,7 +146,10 @@ if (!query.ok) { console.error('Error fetching tile query:', query.statusText); 
           popup.remove();
         });
       });
-  // Add event listener for the Kart button
-    document.getElementById('kartButton').addEventListener('click', showMap);
+ document.addEventListener("DOMContentLoaded", function() {
+    let btn = document.getElementById("mapButton");
+    btn.addEventListener("click", showMap);
+});
+
 </body>
 </html>
