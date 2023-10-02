@@ -38,6 +38,16 @@ body {
     </div>
 
     <script>
+     document.addEventListener("DOMContentLoaded", function() {
+    let btn = document.getElementById("mapButton");
+    btn.addEventListener("click", showMap);
+    initializeMap();
+});
+
+function showMap() {
+    document.getElementById("mapButton").style.display = "none";
+    document.getElementById("mapContainer").style.display = "block";
+}
         function showMap() {
             document.getElementById("mapButton").style.display = "none";
             document.getElementById("mapContainer").style.display = "block";
