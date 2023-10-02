@@ -1,58 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Demo: Make a healthy food finder with the Tilequery API</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-       .mapboxgl-popup-track-pointer * {
-       -webkit-user-select: none; /* For Safari */
-       -ms-user-select: none;     /* For old versions of Edge */
-       user-select: none;         /* Standard Syntax */
-        }
-
-        #mapContainer {
-            display: none;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-
-        #mapButton {
-            position: absolute;
-            z-index: 1;
-            -webkit-tap-highlight-color: rgba(0,0,0,0); /* Example value, adjust as needed */
-        }
-    </style>
+<meta charset="utf-8" />
+<title>Demo: Make a healthy food finder with the Tilequery API</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+<link
+href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+rel="stylesheet"
+/>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link
+rel="stylesheet"
+href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+type="text/css"
+/>
+<style>
+body {
+margin: 0;
+padding: 0;
+}
+ 
+#map {
+position: absolute;
+top: 0;
+bottom: 0;
+width: 100%;
+}
+</style>
 </head>
+ 
 <body>
-    <button id="mapButton" style="position: absolute; z-index: 1;">Kart</button>
-    <div id="mapContainer">
-        <div id="map"></div>
-    </div>
-
-    <script>
-        function showMap() {
-            document.getElementById("mapButton").style.display = "none";
-            document.getElementById("mapContainer").style.display = "block";
-        }
-
-        function initializeMap() {
+<div id="map"></div>
+<script>
             mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA';
             const map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/light-v12',
+                style: 'mapbox://styles/mapbox/light-v10',
                 center: [5.7327, 58.969975],
                 zoom: 12
             });
@@ -77,16 +61,11 @@
           const radius = 10000;
           const limit = 50;
           marker.setLngLat(point).addTo(map);
-          const apiUrl = "https://api.mapbox.com/v4/oscsla.dvyati40/tilequery/" + point[0] + "," + point[1] + ".json?radius=10000&limit=50&access_token=pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA";
-console.log(apiUrl);
-const query = await fetch(apiUrl, { method: 'GET' });
+          const query = await fetch("https://api.mapbox.com/v4/oscsla.dvyati40/tilequery/" + point[0] + "," + point[1] + ".json?radius=10000&limit=50&access_token=pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsbjFvcjU4cDAwcGMyam8zY2JjYnViOWQifQ._X-a2Morhtufm7ApPntqrA", { method: 'GET' });
 
-
-          const json = await query.json();
-if (!query.ok) { console.error('Error fetching tile query:', query.statusText); }
-          map.getSource('tilequery').setData(json);
-        });
-
+const json = await query.json();
+map.getSource('tilequery').setData(json);
+});
         map.addSource('tilequery', {
           type: 'geojson',
           data: {
@@ -134,7 +113,6 @@ if (!query.ok) { console.error('Error fetching tile query:', query.statusText); 
         });
 
         const popup = new mapboxgl.Popup();
-
         map.on('mouseenter', 'tilequery-points', (event) => {
           map.getCanvas().style.cursor = 'pointer';
           const properties = event.features[0].properties;
@@ -158,10 +136,6 @@ if (!query.ok) { console.error('Error fetching tile query:', query.statusText); 
           popup.remove();
         });
       });
-    document.addEventListener("DOMContentLoaded", function() {
-    let btn = document.getElementById("mapButton");
-    btn.addEventListener("click", showMap);
-});
-
+</script>
 </body>
 </html>
