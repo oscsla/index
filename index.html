@@ -4,25 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Protected Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #login-container {
+            position: relative;
+            width: 250px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        #error-message {
+            margin-top: 10px;
+        }
+        button {
+            transition: all 0.5s;
+        }
+    </style>
 </head>
 <body>
     <div id="login-container">
-        <label for="password">Enter Password:</label>
-        <input type="password" id="password">
-        <button onclick="checkPassword()">Submit</button>
+        <label for="password">Enter Password:</label><br>
+        <input type="password" id="password" oninput="checkPasswordAsUserTypes()"><br><br>
+        <button onclick="submitPassword()" onmouseover="moveButton()">Submit</button>
         <p id="error-message" style="color: red;"></p>
     </div>
 
     <script>
-        function checkPassword() {
+        let isIncorrectPassword = false;
+
+        function checkPasswordAsUserTypes() {
+            const password = document.getElementById('password').value;
+            if (password !== "mySecretPassword") {
+                isIncorrectPassword = true;
+            } else {
+                isIncorrectPassword = false;
+            }
+        }
+
+        function submitPassword() {
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // This is the predefined password (change it to whatever you want)
-            if (password === "SRSFMattilsynet") {
+            if (password === "MattilsynetSRSF") {
                 window.location.href = "Forside1.html"; // Redirect to the main content page
             } else {
                 errorMessage.textContent = "Incorrect password. Try again.";
+            }
+        }
+
+        function moveButton() {
+            if (isIncorrectPassword) {
+                const button = document.querySelector("button");
+                const containerWidth = document.getElementById("login-container").offsetWidth;
+                const containerHeight = document.getElementById("login-container").offsetHeight;
+                const maxX = containerWidth - 100;  // Assuming button width is around 100px
+                const maxY = containerHeight - 30;  // Assuming button height is around 30px
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+                button.style.position = "absolute";
+                button.style.left = randomX + "px";
+                button.style.top = randomY + "px";
             }
         }
     </script>
