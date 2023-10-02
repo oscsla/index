@@ -1,4 +1,7 @@
- <meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
     <title>Demo: Make a healthy food finder with the Tilequery API</title>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -7,28 +10,26 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" rel="stylesheet" type="text/css" />
 
     <style>
-body {
-        margin: 0;
-        padding: 0;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+           .mapboxgl-popup-track-pointer * {
+    -webkit-user-select: none;
+    user-select: none;
+}
+        #mapContainer {
+            display: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
 
-    #mapContainer {
-        display: none;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-    }
-
-    #mapButton {
-        position: absolute;
-        z-index: 1;
-    }
-
-    .mapboxgl-popup-track-pointer * {
-        -webkit-user-select: none;  /* Add this line */
-        user-select: none;
-    }
+        #mapButton {
+            position: absolute;
+            z-index: 1;
+            -webkit-tap-highlight-color: rgba(0,0,0,0); /* Example value, adjust as needed */
+        }
     </style>
 </head>
 <body>
@@ -38,16 +39,6 @@ body {
     </div>
 
     <script>
-     document.addEventListener("DOMContentLoaded", function() {
-    let btn = document.getElementById("mapButton");
-    btn.addEventListener("click", showMap);
-    initializeMap();
-});
-
-function showMap() {
-    document.getElementById("mapButton").style.display = "none";
-    document.getElementById("mapContainer").style.display = "block";
-}
         function showMap() {
             document.getElementById("mapButton").style.display = "none";
             document.getElementById("mapContainer").style.display = "block";
