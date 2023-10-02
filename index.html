@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
+ <meta charset="utf-8" />
     <title>Demo: Make a healthy food finder with the Tilequery API</title>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -13,10 +10,10 @@
         body {
             margin: 0;
             padding: 0;
-            -webkit-user-select: none; /* Added for Safari compatibility */
-            user-select: none;
-        }
-
+           .mapboxgl-popup-track-pointer * {
+    -webkit-user-select: none;
+    user-select: none;
+}
         #mapContainer {
             display: none;
             position: absolute;
