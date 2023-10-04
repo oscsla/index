@@ -11,6 +11,7 @@
             flex-direction: column;
             align-items: center;
             background-color: #f4f4f4;
+            margin: 0;
         }
 
         header {
@@ -30,27 +31,29 @@
 
         .container {
             display: flex;
-            flex-direction: row;
             width: 100%;
         }
 
         .left-section,
         .right-section {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
-        .right-section {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+        .section-header {
+            margin-bottom: 20px;
         }
 
         img {
             width: 120px;
             margin: 10px 0;
         }
-img.open-modal-img {
+
+        img.open-modal-img {
             cursor: pointer;
             margin: 10px 0;
             transition: opacity 0.3s;
@@ -104,11 +107,12 @@ img.open-modal-img {
     <div class="divider"></div>
     <div class="container">
         <div class="left-section">
-           <img class="main-image" src="https://i.ibb.co/Sswy9hv/360-F-161046991-66s-DZw-Mi-UUjkv-Zafqvc-PJUVia-Rk-NSXe-P-removebg-preview-1-removebg-preview.png" alt="Click to open kart" onclick="location.href='kart.html'">
+            <h3 class="section-header">Kart</h3>
+            <img src="https://i.ibb.co/Sswy9hv/360-F-161046991-66s-DZw-Mi-UUjkv-Zafqvc-PJUVia-Rk-NSXe-P-removebg-preview-1-removebg-preview.png" alt="chicken">
         </div>
         <div class="right-section">
-           <img class="open-modal-img" src="https://i.ibb.co/ZWnKGs2/How-to-draw-a-cartoon-pig-20.webp" alt="Click to open Svinekampanje%" onclick="openModal('modal1')">
-           <img class="open-modal-img" src="https://i.ibb.co/wNPS4dW/istockphoto-1302726697-612x612-removebg-preview.png" alt="Click to open Lus + Biomasse" onclick="openModal('modal2')">
+            <img src="https://i.ibb.co/ZWnKGs2/How-to-draw-a-cartoon-pig-20.webp" alt="pig">
+            <img src="https://i.ibb.co/wNPS4dW/istockphoto-1302726697-612x612-removebg-preview.png" alt="fish">
         </div>
     </div>
 
@@ -142,6 +146,7 @@ img.open-modal-img {
                 closeModal(event.target.id);
             }
         }
-    </script>
+    </script> 
+
 </body>
 </html>
