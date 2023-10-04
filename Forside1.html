@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Front Page</title>
@@ -8,17 +8,49 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
             background-color: #f4f4f4;
         }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background-color: #000;
+            margin: 20px 0;
+        }
+
         .container {
             display: flex;
-            flex-direction: column; /* Stack elements vertically */
-            align-items: center;
+            flex-direction: row;
+            width: 100%;
         }
-        img.open-modal-img {
+
+        .left-section,
+        .right-section {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        img {
+            width: 120px;
+            margin: 10px 0;
+        }
+img.open-modal-img {
             cursor: pointer;
             margin: 10px 0;
             transition: opacity 0.3s;
@@ -64,12 +96,20 @@
         }
     </style>
 </head>
+
 <body>
+    <header>
+        <h2>Power BI</h2>
+    </header>
+    <div class="divider"></div>
     <div class="container">
-        <h2>PowerBI</h2>
-        <img class="open-modal-img" src="https://i.ibb.co/ZWnKGs2/How-to-draw-a-cartoon-pig-20.webp" alt="Click to open Svinekampanje%" onclick="openModal('modal1')">
-        <img class="open-modal-img" src="https://i.ibb.co/wNPS4dW/istockphoto-1302726697-612x612-removebg-preview.png" alt="Click to open Lus + Biomasse" onclick="openModal('modal2')">
-        <img class="main-image" src="https://i.ibb.co/Sswy9hv/360-F-161046991-66s-DZw-Mi-UUjkv-Zafqvc-PJUVia-Rk-NSXe-P-removebg-preview-1-removebg-preview.png" alt="Click to open kart" onclick="location.href='kart.html'">
+        <div class="left-section">
+           <img class="main-image" src="https://i.ibb.co/Sswy9hv/360-F-161046991-66s-DZw-Mi-UUjkv-Zafqvc-PJUVia-Rk-NSXe-P-removebg-preview-1-removebg-preview.png" alt="Click to open kart" onclick="location.href='kart.html'">
+        </div>
+        <div class="right-section">
+           <img class="open-modal-img" src="https://i.ibb.co/ZWnKGs2/How-to-draw-a-cartoon-pig-20.webp" alt="Click to open Svinekampanje%" onclick="openModal('modal1')">
+           <img class="open-modal-img" src="https://i.ibb.co/wNPS4dW/istockphoto-1302726697-612x612-removebg-preview.png" alt="Click to open Lus + Biomasse" onclick="openModal('modal2')">
+        </div>
     </div>
 
     <!-- The First Modal -->
