@@ -2,78 +2,39 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Guides</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.5.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.5.1/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+<title>Add Search Box to a Web Map</title>
+<!-- Default styling. Feel free to remove! -->
+<link href="https://api.mapbox.com/mapbox-assembly/v1.3.0/assembly.min.css" rel="stylesheet">
+<script id="search-js" defer="" src="https://api.mapbox.com/search-js/v1.0.0-beta.22/web.js"></script>
 </head>
 <body>
-<div id="map"></div>
+<!-- Load Mapbox GL JS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+
+<div id="map" style="position: absolute; width: 100%; height: 100%"></div>
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1Ijoib3Njc2xhIiwiYSI6ImNsaDM5bHp2NzBscjczb25wZTR4d2RocnIifQ.5o20jn_9XvYvhKngcL7Dlw';
+    mapboxgl.accessToken = ACCESS_TOKEN;
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
-        projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
-        zoom: 1,
-        center: [30, 15]
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [-73.99209, 40.68933],
+        zoom: 8.8
     });
 
-    map.addControl(new mapboxgl.NavigationControl());
-    map.scrollZoom.disable();
-
-    map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
-    });
-
-    // The following values can be changed to control rotation speed:
-
-    // At low zooms, complete a revolution every two minutes.
-    const secondsPerRevolution = 240;
-    // Above zoom level 5, do not rotate.
-    const maxSpinZoom = 5;
-    // Rotate at intermediate speeds between zoom levels 3 and 5.
-    const slowSpinZoom = 3;
-
-    let userInteracting = false;
-    const spinEnabled = true;
-
-    function spinGlobe() {
-        const zoom = map.getZoom();
-        if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-            let distancePerSecond = 360 / secondsPerRevolution;
-            if (zoom > slowSpinZoom) {
-                // Slow spinning at higher zooms
-                const zoomDif =
-                    (maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-                distancePerSecond *= zoomDif;
-            }
-            const center = map.getCenter();
-            center.lng -= distancePerSecond;
-            // Smoothly animate the map over one second.
-            // When this animation is complete, it calls a 'moveend' event.
-            map.easeTo({ center, duration: 1000, easing: (n) => n });
-        }
-    }
-
-    // Pause spinning on interaction
-    map.on('mousedown', () => {
-        userInteracting = true;
-    });
-    map.on('dragstart', () => {
-        userInteracting = true;
-    });
-
-    // When animation is complete, start spinning if there is no ongoing interaction
-    map.on('moveend', () => {
-        spinGlobe();
-    });
-
-    spinGlobe();
+    const searchJS = document.getElementById('search-js');
+    searchJS.onload = function () {
+        const searchBox = new MapboxSearchBox();
+        searchBox.accessToken = ACCESS_TOKEN;
+        searchBox.options = {
+            types: 'address,poi',
+            proximity: [-73.99209, 40.68933]
+        };
+        searchBox.marker = true;
+        searchBox.mapboxgl = mapboxgl;
+        map.addControl(searchBox);
+    };
 </script>
 
 </body>
